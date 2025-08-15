@@ -117,7 +117,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &6076096420243234688
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +173,10 @@ MonoBehaviour:
   zigZagFrequency: 2
   sinAmplitude: 1
   sinFrequency: 3
+  health: 0
+  yMin: 0.25
+  yMax: 4.5
+  ySpeed: 1
 --- !u!95 &4129285672225252607
 Animator:
   serializedVersion: 7

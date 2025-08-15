@@ -154,7 +154,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &4574445882210594622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +173,10 @@ MonoBehaviour:
   zigZagFrequency: 2
   sinAmplitude: 1
   sinFrequency: 3
+  health: 0
+  yMin: 0.25
+  yMax: 4.5
+  ySpeed: 1
 --- !u!95 &2806942663867296840
 Animator:
   serializedVersion: 7
