@@ -104,15 +104,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 2
-  speed: 2
+  speed: 3
   zigZagAmplitude: 1
   zigZagFrequency: 2
   sinAmplitude: 1
   sinFrequency: 3
-  health: 2
+  health: 1
   yMin: -4.5
   yMax: 4.5
   ySpeed: 1
+  approachX: -7.5
+  finalTarget: {x: 7, y: 0, z: 0}
 --- !u!50 &3290121414847848535
 Rigidbody2D:
   serializedVersion: 5

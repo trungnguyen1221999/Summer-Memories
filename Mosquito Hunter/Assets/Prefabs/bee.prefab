@@ -168,15 +168,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
-  speed: 2
+  speed: 3
   zigZagAmplitude: 1
   zigZagFrequency: 2
   sinAmplitude: 1
   sinFrequency: 3
-  health: 0
+  health: 2
   yMin: 0.25
   yMax: 4.5
-  ySpeed: 1
+  ySpeed: 2
+  approachX: -7.5
+  finalTarget: {x: 7, y: 0, z: 0}
 --- !u!95 &4129285672225252607
 Animator:
   serializedVersion: 7
