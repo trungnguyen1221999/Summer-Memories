@@ -8,6 +8,9 @@ public class ChildrenHealthManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector3 originalPos;
 
+    [Header("Game Over Settings")]
+    public GameObject gameOverPanel; // Kéo GameOverPanel vào đây trong Inspector
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -18,6 +21,10 @@ public class ChildrenHealthManager : MonoBehaviour
         {
             spriteRenderer.sprite = damageSprites[0];
         }
+
+        // Ẩn GameOver panel ban đầu
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
     }
 
     public void TakeDamage()
@@ -37,8 +44,22 @@ public class ChildrenHealthManager : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("GAME OVER!");
-            // Ở đây bạn có thể gọi SceneManager.LoadScene("GameOverScene");
+            GameOver();
         }
+    }
+
+    private void GameOver()
+    {
+        // Hiện GameOver panel
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        // Hiện con trỏ chuột
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        // Dừng toàn bộ game
+        Time.timeScale = 0f;
     }
 
     private IEnumerator ScreenShake()
