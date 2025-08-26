@@ -33,10 +33,16 @@ public class EnemyController : MonoBehaviour
     [Range(0f, 1f)]
     public float dropChance = 0.2f;   // Tỉ lệ rơi (20%)
 
+    [Header("Audio Settings")]
+    public AudioClip deathSFX;        // Âm thanh khi chết
+    private AudioSource audioSource;
+
     void Start()
     {
         startTime = Time.time;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
 
@@ -152,6 +158,11 @@ public class EnemyController : MonoBehaviour
     private IEnumerator DieEffect()
     {
         isDead = true;
+
+        // Phát SFX khi chết
+        if (audioSource != null && deathSFX != null)
+            audioSource.PlayOneShot(deathSFX);
+
         float duration = 0.5f;
         float elapsed = 0f;
         Vector3 originalPos = transform.position;

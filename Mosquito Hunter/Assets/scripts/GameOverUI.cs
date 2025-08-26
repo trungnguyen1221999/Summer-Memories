@@ -17,4 +17,9 @@ public class GameOverUI : MonoBehaviour
         Application.Quit();
         Debug.Log("Thoát game! (sẽ chỉ hoạt động sau khi build)");
     }
+    public void PlayGame()
+    {
+        Time.timeScale = 1f; // Đảm bảo game không bị pause
+        SceneManager.LoadScene(1); // Load scene có index = 1
+    }
 }

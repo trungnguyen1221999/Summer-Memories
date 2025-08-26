@@ -12,16 +12,21 @@ public class ChildrenHealthManager : MonoBehaviour
     [Header("Game Over Settings")]
     public GameObject gameOverPanel; // Kéo GameOverPanel vào đây trong Inspector
 
+    [Header("Audio Settings")]
+    public AudioClip damageSFX;   // Âm khi mất máu
+    public AudioClip gameOverSFX; // Âm khi GameOver
+    private AudioSource audioSource;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalPos = transform.position; // Lưu vị trí ban đầu
 
+        audioSource = GetComponent<AudioSource>();
+
         // Đảm bảo sprite ban đầu là sprite bình thường
         if (damageSprites.Length > 0)
-        {
             spriteRenderer.sprite = damageSprites[0];
-        }
 
         // Ẩn GameOver panel ban đầu
         if (gameOverPanel != null)
@@ -33,6 +38,10 @@ public class ChildrenHealthManager : MonoBehaviour
         if (health <= 0) return;
 
         health--;
+
+        // Phát SFX mất máu
+        if (audioSource != null && damageSFX != null)
+            audioSource.PlayOneShot(damageSFX);
 
         // Đổi sprite dựa trên lượng máu còn lại
         int spriteIndex = Mathf.Clamp(5 - health, 0, damageSprites.Length - 1);
@@ -56,6 +65,10 @@ public class ChildrenHealthManager : MonoBehaviour
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
 
+        // Phát SFX GameOver
+        if (audioSource != null && gameOverSFX != null)
+            audioSource.PlayOneShot(gameOverSFX);
+
         // Hiện con trỏ chuột
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -66,7 +79,7 @@ public class ChildrenHealthManager : MonoBehaviour
 
     private IEnumerator ScreenShake()
     {
-        if(!isGameOver)
+        if (!isGameOver)
         {
             float duration = 0.3f; // thời gian rung
             float elapsed = 0f;
@@ -77,15 +90,15 @@ public class ChildrenHealthManager : MonoBehaviour
                 Vector3 randomOffset = (Vector3)(Random.insideUnitCircle * magnitude);
                 transform.position = originalPos + randomOffset;
 
-                elapsed += Time.deltaTime;
+                elapsed += Time.unscaledDeltaTime; // dùng unscaledDeltaTime để vẫn rung khi Time.timeScale = 0
                 yield return null;
             }
 
             // Trả về vị trí ban đầu
             transform.position = originalPos;
         }
-       
     }
+
     public void Heal(int amount)
     {
         if (health <= 0) return; // Đã chết thì không hồi
