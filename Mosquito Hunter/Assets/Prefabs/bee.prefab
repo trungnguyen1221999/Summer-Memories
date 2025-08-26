@@ -179,6 +179,8 @@ MonoBehaviour:
   ySpeed: 2
   approachX: -7.5
   finalTarget: {x: 7, y: 0, z: 0}
+  healthPrefab: {fileID: 8403018149233404433, guid: 92b3ce1ddf3bf0440861282aa9c1c154, type: 3}
+  dropChance: 0.1
 --- !u!95 &4129285672225252607
 Animator:
   serializedVersion: 7

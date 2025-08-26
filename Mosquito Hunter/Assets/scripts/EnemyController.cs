@@ -28,6 +28,11 @@ public class EnemyController : MonoBehaviour
     public float approachX = -7.5f;
     public Vector3 finalTarget = new Vector3(7f, -1.5f, 0f);
 
+    [Header("Drop Settings")]
+    public GameObject healthPrefab;   // Prefab máu hồi
+    [Range(0f, 1f)]
+    public float dropChance = 0.2f;   // Tỉ lệ rơi (20%)
+
     void Start()
     {
         startTime = Time.time;
@@ -81,7 +86,6 @@ public class EnemyController : MonoBehaviour
                     break;
 
                 case EnemyType.Enemy3:
-                    // Enemy3 chỉ di chuyển ngang, không đổi Y
                     move += Vector3.zero;
                     break;
 
@@ -90,7 +94,6 @@ public class EnemyController : MonoBehaviour
                     break;
             }
 
-            // Luôn tiến về X
             move += Vector3.right * speed * Time.deltaTime;
             transform.position += move;
 
@@ -159,6 +162,12 @@ public class EnemyController : MonoBehaviour
             transform.position = originalPos + (Vector3)(Random.insideUnitCircle * 0.1f);
             elapsed += Time.deltaTime;
             yield return null;
+        }
+
+        // Xác suất rơi healthPrefab
+        if (healthPrefab != null && Random.value < dropChance)
+        {
+            Instantiate(healthPrefab, transform.position, Quaternion.identity);
         }
 
         Destroy(gameObject);

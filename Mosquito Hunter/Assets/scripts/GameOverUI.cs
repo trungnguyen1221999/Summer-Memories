@@ -13,7 +13,7 @@ public class GameOverUI : MonoBehaviour
     // Gọi hàm này khi bấm nút Exit
     public void ExitGame()
     {
-        Time.timeScale = 1f; // Bỏ pause (nếu không muốn thì có thể bỏ dòng này)
+        Time.timeScale = 1f; // Bỏ pause (có thể bỏ nếu muốn)
         Application.Quit();
         Debug.Log("Thoát game! (sẽ chỉ hoạt động sau khi build)");
     }
